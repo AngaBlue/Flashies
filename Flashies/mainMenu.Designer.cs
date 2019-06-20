@@ -37,39 +37,44 @@
             // 
             this.mainMenuTitle.AutoSize = true;
             this.mainMenuTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mainMenuTitle.Location = new System.Drawing.Point(287, 140);
+            this.mainMenuTitle.Location = new System.Drawing.Point(191, 91);
+            this.mainMenuTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.mainMenuTitle.Name = "mainMenuTitle";
-            this.mainMenuTitle.Size = new System.Drawing.Size(334, 91);
+            this.mainMenuTitle.Size = new System.Drawing.Size(230, 63);
             this.mainMenuTitle.TabIndex = 0;
             this.mainMenuTitle.Text = "Flashies";
             // 
             // mainMenuLearn
             // 
-            this.mainMenuLearn.Location = new System.Drawing.Point(112, 333);
+            this.mainMenuLearn.Location = new System.Drawing.Point(75, 216);
+            this.mainMenuLearn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.mainMenuLearn.Name = "mainMenuLearn";
-            this.mainMenuLearn.Size = new System.Drawing.Size(273, 76);
+            this.mainMenuLearn.Size = new System.Drawing.Size(182, 49);
             this.mainMenuLearn.TabIndex = 1;
             this.mainMenuLearn.Text = "Learn";
             this.mainMenuLearn.UseVisualStyleBackColor = true;
             // 
             // mainMenuCreate
             // 
-            this.mainMenuCreate.Location = new System.Drawing.Point(515, 333);
+            this.mainMenuCreate.Location = new System.Drawing.Point(343, 216);
+            this.mainMenuCreate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.mainMenuCreate.Name = "mainMenuCreate";
-            this.mainMenuCreate.Size = new System.Drawing.Size(273, 76);
+            this.mainMenuCreate.Size = new System.Drawing.Size(182, 49);
             this.mainMenuCreate.TabIndex = 2;
             this.mainMenuCreate.Text = "Create";
             this.mainMenuCreate.UseVisualStyleBackColor = true;
+            this.mainMenuCreate.Click += new System.EventHandler(this.mainMenuCreate_Click);
             // 
             // mainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.mainMenuCreate);
             this.Controls.Add(this.mainMenuLearn);
             this.Controls.Add(this.mainMenuTitle);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "mainMenu";
-            this.Size = new System.Drawing.Size(900, 600);
+            this.Size = new System.Drawing.Size(600, 390);
             this.ResumeLayout(false);
             this.PerformLayout();
 
