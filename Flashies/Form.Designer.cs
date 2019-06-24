@@ -28,22 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu = new Flashies.mainMenu();
+            this.createMenuUC = new Flashies.createMenu();
+            this.mainMenuUC = new Flashies.mainMenu();
+            this.learnMenuUC = new Flashies.learnMenu();
             this.SuspendLayout();
             // 
-            // mainMenu
+            // createMenuUC
             // 
-            this.mainMenu.Location = new System.Drawing.Point(-1, 1);
-            this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(900, 600);
-            this.mainMenu.TabIndex = 0;
+            this.createMenuUC.Location = new System.Drawing.Point(-1, 1);
+            this.createMenuUC.Name = "createMenuUC";
+            this.createMenuUC.Size = new System.Drawing.Size(900, 600);
+            this.createMenuUC.TabIndex = 1;
+            // 
+            // mainMenuUC
+            // 
+            this.mainMenuUC.Location = new System.Drawing.Point(-1, 1);
+            this.mainMenuUC.Name = "mainMenuUC";
+            this.mainMenuUC.Size = new System.Drawing.Size(900, 600);
+            this.mainMenuUC.TabIndex = 0;
+            // 
+            // learnMenuUC
+            // 
+            this.learnMenuUC.Location = new System.Drawing.Point(-1, 1);
+            this.learnMenuUC.Name = "learnMenuUC";
+            this.learnMenuUC.Size = new System.Drawing.Size(900, 600);
+            this.learnMenuUC.TabIndex = 2;
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 600);
-            this.Controls.Add(this.mainMenu);
+            this.Controls.Add(this.learnMenuUC);
+            this.Controls.Add(this.createMenuUC);
+            this.Controls.Add(this.mainMenuUC);
             this.Name = "Form";
             this.Text = "Flashies";
             this.ResumeLayout(false);
@@ -52,7 +70,9 @@
 
         #endregion
 
-        private mainMenu mainMenu;
+        private mainMenu mainMenuUC;
+        private createMenu createMenuUC;
+        private learnMenu learnMenuUC;
     }
 }
 

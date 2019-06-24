@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Flashies
 {
-    public partial class mainMenu : UserControl
+    public partial class createMenu : UserControl
     {
-        public mainMenu()
+        public createMenu()
         {
             InitializeComponent();
         }
