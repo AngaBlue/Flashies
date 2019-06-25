@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FBC00693-E4A6-4E96-8DD4-306532688339}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>Flashies</RootNamespace>
     <AssemblyName>Flashies</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -70,9 +70,7 @@
     <Compile Include="createQuestion.Designer.cs">
       <DependentUpon>createQuestion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Form.cs" />
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>

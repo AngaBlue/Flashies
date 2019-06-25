@@ -28,14 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.createDetailsUC = new Flashies.createDetails();
+            this.learnResultsUC = new Flashies.Properties.learnResults();
             this.questionResultUC = new Flashies.questionResult();
             this.learnQuestionUC = new Flashies.learnQuestion();
             this.learnMenuUC = new Flashies.learnMenu();
             this.createMenuUC = new Flashies.createMenu();
             this.mainMenuUC = new Flashies.mainMenu();
-            this.learnResultsUC = new Flashies.Properties.learnResults();
-            this.createDetailsUC = new Flashies.createDetails();
+            this.createQuestionUC = new Flashies.createQuestion();
             this.SuspendLayout();
+            // 
+            // createDetailsUC
+            // 
+            this.createDetailsUC.Location = new System.Drawing.Point(0, 0);
+            this.createDetailsUC.Name = "createDetailsUC";
+            this.createDetailsUC.Size = new System.Drawing.Size(900, 600);
+            this.createDetailsUC.TabIndex = 6;
+            // 
+            // learnResultsUC
+            // 
+            this.learnResultsUC.Location = new System.Drawing.Point(0, 0);
+            this.learnResultsUC.Name = "learnResultsUC";
+            this.learnResultsUC.Size = new System.Drawing.Size(900, 600);
+            this.learnResultsUC.TabIndex = 5;
             // 
             // questionResultUC
             // 
@@ -72,25 +87,19 @@
             this.mainMenuUC.Size = new System.Drawing.Size(900, 600);
             this.mainMenuUC.TabIndex = 0;
             // 
-            // learnResultsUC
+            // createQuestionUC
             // 
-            this.learnResultsUC.Location = new System.Drawing.Point(0, 0);
-            this.learnResultsUC.Name = "learnResultsUC";
-            this.learnResultsUC.Size = new System.Drawing.Size(900, 600);
-            this.learnResultsUC.TabIndex = 5;
-            // 
-            // createDetailsUC
-            // 
-            this.createDetailsUC.Location = new System.Drawing.Point(0, 0);
-            this.createDetailsUC.Name = "createDetailsUC";
-            this.createDetailsUC.Size = new System.Drawing.Size(900, 600);
-            this.createDetailsUC.TabIndex = 6;
+            this.createQuestionUC.Location = new System.Drawing.Point(0, 0);
+            this.createQuestionUC.Name = "createQuestionUC";
+            this.createQuestionUC.Size = new System.Drawing.Size(900, 600);
+            this.createQuestionUC.TabIndex = 7;
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 600);
+            this.Controls.Add(this.createQuestionUC);
             this.Controls.Add(this.createDetailsUC);
             this.Controls.Add(this.learnResultsUC);
             this.Controls.Add(this.questionResultUC);
@@ -113,6 +122,7 @@
         private questionResult questionResultUC;
         private Properties.learnResults learnResultsUC;
         private createDetails createDetailsUC;
+        private createQuestion createQuestionUC;
     }
 }
 

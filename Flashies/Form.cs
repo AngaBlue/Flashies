@@ -11,6 +11,19 @@ using LiteDB;
 
 namespace Flashies
 {
+    public static class ExtensionMethods
+    {
+        //Find Control Helper Method
+        public static Control getControl(this UserControl userControl, string name)
+        {
+            return userControl.Controls.Find(name, false).FirstOrDefault();
+        }
+        //Create Click Handler Helper Method
+        public static void createClickHandler(this Control button, EventHandler eventHandler)
+        {
+            button.Click += new System.EventHandler(eventHandler);
+        }
+    }
     public partial class Form : System.Windows.Forms.Form
     {
         //Flashcard Set Class
@@ -38,7 +51,6 @@ namespace Flashies
             });
             page.Visible = true;
         }
-
         public Form()
         {
             InitializeComponent();
@@ -51,25 +63,30 @@ namespace Flashies
              * Add Event Listeners to Buttons
              */
             //Main Menu
-            mainMenuUC.Controls.Find("btnLearn", false).FirstOrDefault().Click += new System.EventHandler(menuLearn);
-            mainMenuUC.Controls.Find("btnCreate", false).FirstOrDefault().Click += new System.EventHandler(menuCreate);
+            mainMenuUC.getControl("btnLearn").createClickHandler(menuLearn);
+            mainMenuUC.getControl("btnCreate").createClickHandler(menuCreate);
             //Learn Menu
-            learnMenuUC.Controls.Find("btnExit", false).FirstOrDefault().Click += new System.EventHandler(exit);
-            learnMenuUC.Controls.Find("btnStart", false).FirstOrDefault().Click += new System.EventHandler(learnStart);
+            mainMenuUC.getControl("btnExit").createClickHandler(exit);
+            learnMenuUC.getControl("btnStart").createClickHandler(learnStart);
             //Create Menu
-            createMenuUC.Controls.Find("btnExit", false).FirstOrDefault().Click += new System.EventHandler(exit);
-            createMenuUC.Controls.Find("btnDelete", false).FirstOrDefault().Click += new System.EventHandler(setDelete);
-            createMenuUC.Controls.Find("btnNew", false).FirstOrDefault().Click += new System.EventHandler(createDetails);
+            createMenuUC.getControl("btnExit").createClickHandler(exit);
+            createMenuUC.getControl("btnDelete").createClickHandler(setDelete);
+            createMenuUC.getControl("btnNew").createClickHandler(createDetails);
             //Create Details
-            createDetailsUC.Controls.Find("btnExit", false).FirstOrDefault().Click += new System.EventHandler(exit);
+            createDetailsUC.getControl("btnExit").createClickHandler(exit);
+            createDetailsUC.getControl("btnNext").createClickHandler(checkCreateDetails);
+            //Create Question
+            createQuestionUC.getControl("btnExit").createClickHandler(exit);
+            createQuestionUC.getControl("btnNext").createClickHandler(checkCreateQuestion);
+            createQuestionUC.getControl("btnFinish").createClickHandler(checkLastQuestion);
             //Learn Question
-            learnQuestionUC.Controls.Find("btnExit", false).FirstOrDefault().Click += new System.EventHandler(exit);
-            learnQuestionUC.Controls.Find("btnSubmit", false).FirstOrDefault().Click += new System.EventHandler(checkLearnQuestion);
+            learnQuestionUC.getControl("btnExit").createClickHandler(exit);
+            learnQuestionUC.getControl("btnSubmit").createClickHandler(checkLearnQuestion);
             //Learn Question Result
-            questionResultUC.Controls.Find("btnExit", false).FirstOrDefault().Click += new System.EventHandler(exit);
-            questionResultUC.Controls.Find("btnContinue", false).FirstOrDefault().Click += new System.EventHandler(renderLearnQuestion);
+            questionResultUC.getControl("btnExit").createClickHandler(exit);
+            questionResultUC.getControl("btnContinue").createClickHandler(renderLearnQuestion);
             //Learn Results
-            learnResultsUC.Controls.Find("btnContinue", false).FirstOrDefault().Click += new System.EventHandler(menuLearn);
+            learnResultsUC.getControl("btnContinue").createClickHandler(menuLearn);
             //Render Main Menu
             renderPage(mainMenuUC);
 
@@ -77,24 +94,6 @@ namespace Flashies
             using (var db = new LiteDatabase(@"flashies.db"))
             {
                 var sets = db.GetCollection<FlashcardSet>("sets");
-                /*var set = new FlashcardSet
-                {
-                    timestamp = DateTimeOffset.Now.ToUnixTimeSeconds(),
-                    name = "Periodic Table: Beginnings",
-                    description = "The first 3 elements of the periodic table.",
-                    flashcards = new List<Flashcard> {new Flashcard{
-                        question = "What is the first element of the periodic table?",
-                        answer = "Hydrogen"
-                        }, new Flashcard{
-                        question = "What is the second element of the periodic table?",
-                        answer = "Helium"
-                        }, new Flashcard{
-                        question = "What is the third element of the periodic table?",
-                        answer = "Lithium"
-                        },
-                    }
-                };
-                sets.Insert(set);*/
             }
         }
         FlashcardSet learnSet = new FlashcardSet { };
@@ -108,28 +107,28 @@ namespace Flashies
             if (learnProgress == learnSet.flashcards.Count)
             {   //Render Results
                 int percentage = learnCorrect * 100 / learnSet.flashcards.Count;
-                ((TextBox)learnResultsUC.Controls.Find("txtTitle", false).FirstOrDefault()).Text = learnSet.name;
-                ((TextBox)learnResultsUC.Controls.Find("txtCorrect", false).FirstOrDefault()).Text = $"Correct: {learnCorrect}/{learnSet.flashcards.Count} ({percentage}%)";
+                ((TextBox)learnResultsUC.getControl("txtTitle")).Text = learnSet.name;
+                ((TextBox)learnResultsUC.getControl("txtCorrect")).Text = $"Correct: {learnCorrect}/{learnSet.flashcards.Count} ({percentage}%)";
                 renderPage(learnResultsUC);
             } else {
                 //Render Next Question
-                ((TextBox)learnQuestionUC.Controls.Find("txtProgress", false).FirstOrDefault()).Text = $"Q {learnProgress + 1}/{learnSet.flashcards.Count}";
-                ((TextBox)learnQuestionUC.Controls.Find("txtScore", false).FirstOrDefault()).Text = $"Correct: {learnCorrect}/{learnProgress}";
-                ((TextBox)learnQuestionUC.Controls.Find("txtQuestion", false).FirstOrDefault()).Text = learnSet.flashcards[learnProgress].question;
-                ((TextBox)learnQuestionUC.Controls.Find("txtAnswer", false).FirstOrDefault()).Text = "";
+                ((TextBox)learnQuestionUC.getControl("txtProgress")).Text = $"Q: {learnProgress + 1}/{learnSet.flashcards.Count}";
+                ((TextBox)learnQuestionUC.getControl("txtScore")).Text = $"Correct: {learnCorrect}/{learnProgress}";
+                ((TextBox)learnQuestionUC.getControl("txtQuestion")).Text = learnSet.flashcards[learnProgress].question;
+                ((TextBox)learnQuestionUC.getControl("txtAnswer")).Text = "";
                 renderPage(learnQuestionUC);
             }
         }
         public void checkLearnQuestion(object sender, EventArgs e)
         {
-            var userAnswer = ((TextBox)learnQuestionUC.Controls.Find("txtAnswer", false).FirstOrDefault()).Text;
+            var userAnswer = ((TextBox)learnQuestionUC.getControl("txtAnswer")).Text;
             if (userAnswer != "")
             {
-                ((TextBox)questionResultUC.Controls.Find("txtQuestion", false).FirstOrDefault()).Text = learnSet.flashcards[learnProgress].question;
-                ((TextBox)questionResultUC.Controls.Find("txtProgress", false).FirstOrDefault()).Text = $"Q {learnProgress + 1}/{learnSet.flashcards.Count}";
-                ((TextBox)questionResultUC.Controls.Find("txtUserAnswer", false).FirstOrDefault()).Text = $"Your Answer: {userAnswer}";
-                ((TextBox)questionResultUC.Controls.Find("txtCorrectAnswer", false).FirstOrDefault()).Text = $"Correct Answer: {learnSet.flashcards[learnProgress].answer}";
-                var txtResult = (TextBox)questionResultUC.Controls.Find("txtResult", false).FirstOrDefault();
+                ((TextBox)questionResultUC.getControl("txtQuestion")).Text = learnSet.flashcards[learnProgress].question;
+                ((TextBox)questionResultUC.getControl("txtProgress")).Text = $"Q: {learnProgress + 1}/{learnSet.flashcards.Count}";
+                ((TextBox)questionResultUC.getControl("txtUserAnswer")).Text = $"Your Answer: {userAnswer}";
+                ((TextBox)questionResultUC.getControl("txtCorrectAnswer")).Text = $"Correct Answer: {learnSet.flashcards[learnProgress].answer}";
+                var txtResult = (TextBox)questionResultUC.getControl("txtResult");
                 //Check Response
                 bool correct = userAnswer == learnSet.flashcards[learnProgress].answer;
                 if (correct)
@@ -139,7 +138,7 @@ namespace Flashies
                 } else {
                     txtResult.Text = "Incorrect";
                 }
-                ((TextBox)questionResultUC.Controls.Find("txtScore", false).FirstOrDefault()).Text = $"Correct: {learnCorrect}/{learnProgress + 1}";
+                ((TextBox)questionResultUC.getControl("txtScore")).Text = $"Correct: {learnCorrect}/{learnProgress + 1}";
                 learnProgress++;
                 renderPage(questionResultUC);
             }
@@ -150,7 +149,7 @@ namespace Flashies
             learnCorrect = 0;
             learnSet = new FlashcardSet { };
             //Find List Item
-            var listView = (ListView)learnMenuUC.Controls.Find("listView", false).FirstOrDefault();
+            var listView = (ListView)learnMenuUC.getControl("listView");
             if (listView.SelectedItems.Count == 1)
             {
                 var setID = Convert.ToInt32(listView.SelectedItems[0].SubItems[0].Text);
@@ -169,8 +168,8 @@ namespace Flashies
                         learnSet.flashcards[k] = learnSet.flashcards[n];
                         learnSet.flashcards[n] = value;
                     }
-                    ((TextBox)learnQuestionUC.Controls.Find("txtTitle", false).FirstOrDefault()).Text = learnSet.name;
-                    ((TextBox)questionResultUC.Controls.Find("txtTitle", false).FirstOrDefault()).Text = learnSet.name;
+                    ((TextBox)learnQuestionUC.getControl("txtTitle")).Text = learnSet.name;
+                    ((TextBox)questionResultUC.getControl("txtTitle")).Text = learnSet.name;
                     //Render Learn Question
                     renderLearnQuestion(this, e);
                 }
@@ -197,7 +196,7 @@ namespace Flashies
         public void setDelete(object sender, EventArgs e)
         {
             //Find List Item
-            var listView = (ListView)createMenuUC.Controls.Find("listView", false).FirstOrDefault();
+            var listView = (ListView)createMenuUC.getControl("listView");
             if (listView.SelectedItems.Count == 1)
             {
                 var setID = Convert.ToInt32(listView.SelectedItems[0].SubItems[0].Text);
@@ -214,7 +213,7 @@ namespace Flashies
         public void menuCreate(object sender, EventArgs e)
         {
             //Display All Flashcard Sets in DB
-            renderSets((ListView)createMenuUC.Controls.Find("listView", false).FirstOrDefault());
+            renderSets((ListView)createMenuUC.getControl("listView"));
             renderPage(createMenuUC);
         }
         public void createDetails(object sender, EventArgs e)
@@ -223,38 +222,65 @@ namespace Flashies
             createSet = new FlashcardSet { };
             renderPage(createDetailsUC);
         }
-        public void menuLearn(object sender, EventArgs e)
+        public void checkCreateDetails(object sender, EventArgs e)
         {
+            var setName = ((TextBox)createDetailsUC.getControl("txtName")).Text;
+            var setDesc = ((TextBox)createDetailsUC.getControl("txtName")).Text;
+            if (setName != "" && setDesc != "")
+            {
+                createSet.name = setName;
+                createSet.description = setDesc;
+                createSet.flashcards = new List<Flashcard>();
+                ((TextBox)createQuestionUC.getControl("txtTitle")).Text = setName;
+                createNextQuestion();
+                renderPage(createQuestionUC);
+            }
+        }
+
+        public void createNextQuestion() {
+            ((TextBox)createQuestionUC.getControl("txtQuestion")).Text = "";
+            ((TextBox)createQuestionUC.getControl("txtAnswer")).Text = "";
+            var cardCount = createSet.flashcards == null ? "0" : createSet.flashcards.Count.ToString();
+            ((TextBox)createQuestionUC.getControl("txtQuestionNumber")).Text = $"Q: {cardCount}";
+        }
+
+        public void checkCreateQuestion(object sender, EventArgs e)
+        {
+            Flashcard flashcard = new Flashcard
+            {
+                question = ((TextBox)createQuestionUC.getControl("txtQuestion")).Text,
+                answer = ((TextBox)createQuestionUC.getControl("txtAnswer")).Text
+            };
+            if (flashcard.question != "" && flashcard.answer != "")
+            {
+                createSet.flashcards.Add(flashcard);
+                createNextQuestion();
+            }
+        }
+        public void checkLastQuestion(object sender, EventArgs e)
+        {
+            Flashcard flashcard = new Flashcard
+            {
+                question = ((TextBox)createQuestionUC.getControl("txtQuestion")).Text,
+                answer = ((TextBox)createQuestionUC.getControl("txtAnswer")).Text
+            };
+            if (flashcard.question != "" && flashcard.answer != "")
+            {
+                createSet.flashcards.Add(flashcard);
+                using (var db = new LiteDatabase(@"flashies.db"))
+                {
+                    var sets = db.GetCollection<FlashcardSet>("sets");
+                    sets.Insert(createSet);
+                }
+                menuCreate(this, e);
+            }
+        }
+        public void menuLearn(object sender, EventArgs e)  
+            {
             //Display All Flashcard Sets in DB
-            renderSets((ListView)learnMenuUC.Controls.Find("listView", false).FirstOrDefault());
+            renderSets((ListView)learnMenuUC.getControl("listView"));
             //Render Learn Page
             renderPage(learnMenuUC);
-            //Database Testing
-            /*using (var db = new LiteDatabase(@"flashies.db"))
-            {
-                var sets = db.GetCollection<FlashcardSet>("sets");
-                var flashcard = new Flashcard
-                {
-                    question = "What is the first element of the periodic table?",
-                    answer = "Hydrogen"
-                };
-                var set = new FlashcardSet
-                {
-                    timestamp = DateTimeOffset.Now.ToUnixTimeSeconds(),
-                    name = "Test Set 4",
-                    description = "A set for testing",
-                    flashcards = new List<Flashcard> { flashcard }
-                };
-                sets.Insert(set);
-                Console.WriteLine("Hello?");
-                var results = sets.Find(x => x.name == "Test Set 4");
-                foreach (var c in results) {
-                    Console.WriteLine(c.description);
-                    Console.WriteLine(c.flashcards);
-                }
-                //Delete All
-                //sets.Delete(Query.All());
-            }*/
         }
     }
 }

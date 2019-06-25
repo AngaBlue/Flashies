@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnNew = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -39,14 +39,14 @@
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // btnNew
+            // btnNext
             // 
-            this.btnNew.Location = new System.Drawing.Point(762, 540);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(117, 47);
-            this.btnNew.TabIndex = 9;
-            this.btnNew.Text = "Next";
-            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNext.Location = new System.Drawing.Point(762, 540);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(117, 47);
+            this.btnNext.TabIndex = 9;
+            this.btnNext.Text = "Next";
+            this.btnNext.UseVisualStyleBackColor = true;
             // 
             // btnExit
             // 
@@ -157,7 +157,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.txtTitle);
-            this.Controls.Add(this.btnNew);
+            this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnExit);
             this.Name = "createDetails";
             this.Size = new System.Drawing.Size(900, 600);
@@ -167,7 +167,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.TextBox textBox1;

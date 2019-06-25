@@ -35,15 +35,15 @@
             this.txtAnswer = new System.Windows.Forms.TextBox();
             this.txtQuestionLabel = new System.Windows.Forms.TextBox();
             this.txtAnswerLabel = new System.Windows.Forms.TextBox();
-            this.txtQuestionNo = new System.Windows.Forms.TextBox();
+            this.txtQuestionNumber = new System.Windows.Forms.TextBox();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(762, 540);
+            this.btnNext.Location = new System.Drawing.Point(750, 540);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(117, 47);
+            this.btnNext.Size = new System.Drawing.Size(129, 47);
             this.btnNext.TabIndex = 9;
             this.btnNext.Text = "Next Question";
             this.btnNext.UseVisualStyleBackColor = true;
@@ -59,11 +59,11 @@
             // 
             // btnFinish
             // 
-            this.btnFinish.Location = new System.Drawing.Point(639, 540);
+            this.btnFinish.Location = new System.Drawing.Point(570, 540);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(117, 47);
+            this.btnFinish.Size = new System.Drawing.Size(174, 47);
             this.btnFinish.TabIndex = 11;
-            this.btnFinish.Text = "Finish";
+            this.btnFinish.Text = "Create Last Question";
             this.btnFinish.UseVisualStyleBackColor = true;
             // 
             // txtQuestion
@@ -115,20 +115,20 @@
             this.txtAnswerLabel.Text = "Answer";
             this.txtAnswerLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtQuestionNo
+            // txtQuestionNumber
             // 
-            this.txtQuestionNo.BackColor = System.Drawing.SystemColors.Menu;
-            this.txtQuestionNo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtQuestionNo.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtQuestionNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuestionNo.Location = new System.Drawing.Point(762, 14);
-            this.txtQuestionNo.Name = "txtQuestionNo";
-            this.txtQuestionNo.ReadOnly = true;
-            this.txtQuestionNo.Size = new System.Drawing.Size(135, 37);
-            this.txtQuestionNo.TabIndex = 26;
-            this.txtQuestionNo.TabStop = false;
-            this.txtQuestionNo.Text = "Q -";
-            this.txtQuestionNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtQuestionNumber.BackColor = System.Drawing.SystemColors.Menu;
+            this.txtQuestionNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtQuestionNumber.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtQuestionNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQuestionNumber.Location = new System.Drawing.Point(762, 14);
+            this.txtQuestionNumber.Name = "txtQuestionNumber";
+            this.txtQuestionNumber.ReadOnly = true;
+            this.txtQuestionNumber.Size = new System.Drawing.Size(135, 37);
+            this.txtQuestionNumber.TabIndex = 26;
+            this.txtQuestionNumber.TabStop = false;
+            this.txtQuestionNumber.Text = "Q -";
+            this.txtQuestionNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtTitle
             // 
@@ -144,12 +144,12 @@
             this.txtTitle.TabStop = false;
             this.txtTitle.Text = "Title";
             // 
-            // createQuestioncs
+            // createQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.txtTitle);
-            this.Controls.Add(this.txtQuestionNo);
+            this.Controls.Add(this.txtQuestionNumber);
             this.Controls.Add(this.txtAnswerLabel);
             this.Controls.Add(this.txtQuestion);
             this.Controls.Add(this.txtAnswer);
@@ -157,7 +157,7 @@
             this.Controls.Add(this.btnFinish);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnExit);
-            this.Name = "createQuestioncs";
+            this.Name = "createQuestion";
             this.Size = new System.Drawing.Size(900, 600);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -172,7 +172,7 @@
         private System.Windows.Forms.TextBox txtAnswer;
         private System.Windows.Forms.TextBox txtQuestionLabel;
         private System.Windows.Forms.TextBox txtAnswerLabel;
-        private System.Windows.Forms.TextBox txtQuestionNo;
+        private System.Windows.Forms.TextBox txtQuestionNumber;
         private System.Windows.Forms.TextBox txtTitle;
     }
 }
