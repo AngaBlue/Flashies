@@ -87,63 +87,51 @@ namespace Flashies
             questionResultUC.getControl("btnContinue").createClickHandler(renderLearnQuestion);
             //Learn Results
             learnResultsUC.getControl("btnContinue").createClickHandler(menuLearn);
+            
             //Render Main Menu
             renderPage(mainMenuUC);
-
-            //Init a Testing Set
-            using (var db = new LiteDatabase(@"flashies.db"))
-            {
-                var sets = db.GetCollection<FlashcardSet>("sets");
-            }
         }
+        //Variable Initialisation
         FlashcardSet learnSet = new FlashcardSet { };
         int learnCorrect = 0;
         int learnProgress = 0;
         FlashcardSet createSet = new FlashcardSet { };
 
-        //Render Question for Learn
-        public void renderLearnQuestion(object sender, EventArgs e)
+        /*
+         * GLOBAL METHODS
+         */
+        //Exit Function to Return to Main Menu
+        public void exit(object sender, EventArgs e)
         {
-            if (learnProgress == learnSet.flashcards.Count)
-            {   //Render Results
-                int percentage = learnCorrect * 100 / learnSet.flashcards.Count;
-                ((TextBox)learnResultsUC.getControl("txtTitle")).Text = learnSet.name;
-                ((TextBox)learnResultsUC.getControl("txtCorrect")).Text = $"Correct: {learnCorrect}/{learnSet.flashcards.Count} ({percentage}%)";
-                renderPage(learnResultsUC);
-            } else {
-                //Render Next Question
-                ((TextBox)learnQuestionUC.getControl("txtProgress")).Text = $"Q: {learnProgress + 1}/{learnSet.flashcards.Count}";
-                ((TextBox)learnQuestionUC.getControl("txtScore")).Text = $"Correct: {learnCorrect}/{learnProgress}";
-                ((TextBox)learnQuestionUC.getControl("txtQuestion")).Text = learnSet.flashcards[learnProgress].question;
-                ((TextBox)learnQuestionUC.getControl("txtAnswer")).Text = "";
-                renderPage(learnQuestionUC);
-            }
+            renderPage(mainMenuUC);
         }
-        public void checkLearnQuestion(object sender, EventArgs e)
+        //Set Render Method for Learn and Create Menu
+        public void renderSets(ListView listView)
         {
-            var userAnswer = ((TextBox)learnQuestionUC.getControl("txtAnswer")).Text;
-            if (userAnswer != "")
+            using (var db = new LiteDatabase(@"flashies.db"))
             {
-                ((TextBox)questionResultUC.getControl("txtQuestion")).Text = learnSet.flashcards[learnProgress].question;
-                ((TextBox)questionResultUC.getControl("txtProgress")).Text = $"Q: {learnProgress + 1}/{learnSet.flashcards.Count}";
-                ((TextBox)questionResultUC.getControl("txtUserAnswer")).Text = $"Your Answer: {userAnswer}";
-                ((TextBox)questionResultUC.getControl("txtCorrectAnswer")).Text = $"Correct Answer: {learnSet.flashcards[learnProgress].answer}";
-                var txtResult = (TextBox)questionResultUC.getControl("txtResult");
-                //Check Response
-                bool correct = userAnswer == learnSet.flashcards[learnProgress].answer;
-                if (correct)
+                var sets = db.GetCollection<FlashcardSet>("sets");
+                var flashcardSets = sets.Find(Query.All("timestamp", Query.Ascending));
+                listView.Items.Clear();
+                foreach (FlashcardSet set in flashcardSets)
                 {
-                    learnCorrect++;
-                    txtResult.Text = "Correct!";
-                } else {
-                    txtResult.Text = "Incorrect";
-                }
-                ((TextBox)questionResultUC.getControl("txtScore")).Text = $"Correct: {learnCorrect}/{learnProgress + 1}";
-                learnProgress++;
-                renderPage(questionResultUC);
-            }
+                    listView.Items.Add(new ListViewItem(new string[] { set.id.ToString(), set.name, set.description }));
+                };
+            };
         }
-        public void learnStart(object sender, EventArgs e) {
+
+        /*
+         * LEARN FLASHCARDS
+         */
+        public void menuLearn(object sender, EventArgs e)
+        {
+            //Display All Flashcard Sets in DB
+            renderSets((ListView)learnMenuUC.getControl("listView"));
+            //Render Learn Page
+            renderPage(learnMenuUC);
+        }
+        public void learnStart(object sender, EventArgs e)
+        {
             //Reset Global Variables
             learnProgress = 0;
             learnCorrect = 0;
@@ -170,28 +158,64 @@ namespace Flashies
                     }
                     ((TextBox)learnQuestionUC.getControl("txtTitle")).Text = learnSet.name;
                     ((TextBox)questionResultUC.getControl("txtTitle")).Text = learnSet.name;
-                    //Render Learn Question
+                    //Render Next Question
                     renderLearnQuestion(this, e);
                 }
-
             }
         }
-        public void exit(object sender, EventArgs e)
+        public void renderLearnQuestion(object sender, EventArgs e)
         {
-            renderPage(mainMenuUC);
-        }
-        public void renderSets(ListView listView)
-        {
-            using (var db = new LiteDatabase(@"flashies.db"))
+            if (learnProgress == learnSet.flashcards.Count)
+            {   //Render Results
+                int percentage = learnCorrect * 100 / learnSet.flashcards.Count;
+                ((TextBox)learnResultsUC.getControl("txtTitle")).Text = learnSet.name;
+                ((TextBox)learnResultsUC.getControl("txtCorrect")).Text = $"Correct: {learnCorrect}/{learnSet.flashcards.Count} ({percentage}%)";
+                renderPage(learnResultsUC);
+            }
+            else
             {
-                var sets = db.GetCollection<FlashcardSet>("sets");
-                var flashcardSets = sets.Find(Query.All("timestamp", Query.Ascending));
-                listView.Items.Clear();
-                foreach (FlashcardSet set in flashcardSets)
+                //Render Next Question
+                ((TextBox)learnQuestionUC.getControl("txtProgress")).Text = $"Q: {learnProgress + 1}/{learnSet.flashcards.Count}";
+                ((TextBox)learnQuestionUC.getControl("txtScore")).Text = $"Correct: {learnCorrect}/{learnProgress}";
+                ((TextBox)learnQuestionUC.getControl("txtQuestion")).Text = learnSet.flashcards[learnProgress].question;
+                ((TextBox)learnQuestionUC.getControl("txtAnswer")).Text = "";
+                renderPage(learnQuestionUC);
+            }
+        }
+        public void checkLearnQuestion(object sender, EventArgs e)
+        {
+            var userAnswer = ((TextBox)learnQuestionUC.getControl("txtAnswer")).Text;
+            if (userAnswer != "")
+            {
+                ((TextBox)questionResultUC.getControl("txtQuestion")).Text = learnSet.flashcards[learnProgress].question;
+                ((TextBox)questionResultUC.getControl("txtProgress")).Text = $"Q: {learnProgress + 1}/{learnSet.flashcards.Count}";
+                ((TextBox)questionResultUC.getControl("txtUserAnswer")).Text = $"Your Answer: {userAnswer}";
+                ((TextBox)questionResultUC.getControl("txtCorrectAnswer")).Text = $"Correct Answer: {learnSet.flashcards[learnProgress].answer}";
+                var txtResult = (TextBox)questionResultUC.getControl("txtResult");
+                //Check Response
+                bool correct = userAnswer == learnSet.flashcards[learnProgress].answer;
+                if (correct)
                 {
-                    listView.Items.Add(new ListViewItem(new string[] { set.id.ToString(), set.name, set.description }));
-                };
-            };
+                    learnCorrect++;
+                    txtResult.Text = "Correct!";
+                }
+                else
+                {
+                    txtResult.Text = "Incorrect";
+                }
+                ((TextBox)questionResultUC.getControl("txtScore")).Text = $"Correct: {learnCorrect}/{learnProgress + 1}";
+                learnProgress++;
+                renderPage(questionResultUC);
+            }
+        }
+        /*
+         * CREATE FLASHCARDS
+         */
+        public void menuCreate(object sender, EventArgs e)
+        {
+            //Display All Flashcard Sets in DB
+            renderSets((ListView)createMenuUC.getControl("listView"));
+            renderPage(createMenuUC);
         }
         public void setDelete(object sender, EventArgs e)
         {
@@ -209,12 +233,6 @@ namespace Flashies
                 //Re-render Menu
                 menuCreate(this, e);
             }
-        }
-        public void menuCreate(object sender, EventArgs e)
-        {
-            //Display All Flashcard Sets in DB
-            renderSets((ListView)createMenuUC.getControl("listView"));
-            renderPage(createMenuUC);
         }
         public void createDetails(object sender, EventArgs e)
         {
@@ -237,7 +255,8 @@ namespace Flashies
             }
         }
 
-        public void createNextQuestion() {
+        public void createNextQuestion()
+        {
             ((TextBox)createQuestionUC.getControl("txtQuestion")).Text = "";
             ((TextBox)createQuestionUC.getControl("txtAnswer")).Text = "";
             var cardCount = createSet.flashcards == null ? "0" : createSet.flashcards.Count.ToString();
@@ -246,41 +265,41 @@ namespace Flashies
 
         public void checkCreateQuestion(object sender, EventArgs e)
         {
+            //Initialise New Flashcard
             Flashcard flashcard = new Flashcard
             {
                 question = ((TextBox)createQuestionUC.getControl("txtQuestion")).Text,
                 answer = ((TextBox)createQuestionUC.getControl("txtAnswer")).Text
             };
+            //Check Flashcard Validity
             if (flashcard.question != "" && flashcard.answer != "")
             {
                 createSet.flashcards.Add(flashcard);
+                //Render Next Question Creation Panel
                 createNextQuestion();
             }
         }
         public void checkLastQuestion(object sender, EventArgs e)
         {
+            //Initialise New Flashcard
             Flashcard flashcard = new Flashcard
             {
                 question = ((TextBox)createQuestionUC.getControl("txtQuestion")).Text,
                 answer = ((TextBox)createQuestionUC.getControl("txtAnswer")).Text
             };
+            //Check Flashcard Validity
             if (flashcard.question != "" && flashcard.answer != "")
             {
                 createSet.flashcards.Add(flashcard);
+                //Add Set to DB
                 using (var db = new LiteDatabase(@"flashies.db"))
                 {
                     var sets = db.GetCollection<FlashcardSet>("sets");
                     sets.Insert(createSet);
                 }
+                //Return to Create Menu
                 menuCreate(this, e);
             }
-        }
-        public void menuLearn(object sender, EventArgs e)  
-            {
-            //Display All Flashcard Sets in DB
-            renderSets((ListView)learnMenuUC.getControl("listView"));
-            //Render Learn Page
-            renderPage(learnMenuUC);
         }
     }
 }
