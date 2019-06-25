@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using LiteDB;
 
@@ -66,7 +61,7 @@ namespace Flashies
             mainMenuUC.getControl("btnLearn").createClickHandler(menuLearn);
             mainMenuUC.getControl("btnCreate").createClickHandler(menuCreate);
             //Learn Menu
-            mainMenuUC.getControl("btnExit").createClickHandler(exit);
+            learnMenuUC.getControl("btnExit").createClickHandler(exit);
             learnMenuUC.getControl("btnStart").createClickHandler(learnStart);
             //Create Menu
             createMenuUC.getControl("btnExit").createClickHandler(exit);
@@ -259,7 +254,7 @@ namespace Flashies
         {
             ((TextBox)createQuestionUC.getControl("txtQuestion")).Text = "";
             ((TextBox)createQuestionUC.getControl("txtAnswer")).Text = "";
-            var cardCount = createSet.flashcards == null ? "0" : createSet.flashcards.Count.ToString();
+            var cardCount = createSet.flashcards == null ? "1" : (createSet.flashcards.Count + 1).ToString();
             ((TextBox)createQuestionUC.getControl("txtQuestionNumber")).Text = $"Q: {cardCount}";
         }
 
