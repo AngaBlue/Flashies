@@ -52,11 +52,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="createDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="createDetails.Designer.cs">
+      <DependentUpon>createDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="createMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="createMenu.Designer.cs">
       <DependentUpon>createMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="createQuestion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="createQuestion.Designer.cs">
+      <DependentUpon>createQuestion.cs</DependentUpon>
     </Compile>
     <Compile Include="Form.cs">
       <SubType>Form</SubType>
@@ -70,6 +82,12 @@
     <Compile Include="learnMenu.Designer.cs">
       <DependentUpon>learnMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="learnQuestion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="learnQuestion.Designer.cs">
+      <DependentUpon>learnQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="mainMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -78,8 +96,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\learnResults.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\learnResults.Designer.cs">
+      <DependentUpon>learnResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="questionResult.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="questionResult.Designer.cs">
+      <DependentUpon>questionResult.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="createDetails.resx">
+      <DependentUpon>createDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="createMenu.resx">
       <DependentUpon>createMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="createQuestion.resx">
+      <DependentUpon>createQuestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form.resx">
       <DependentUpon>Form.cs</DependentUpon>
@@ -87,8 +123,14 @@
     <EmbeddedResource Include="learnMenu.resx">
       <DependentUpon>learnMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="learnQuestion.resx">
+      <DependentUpon>learnQuestion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="mainMenu.resx">
       <DependentUpon>mainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\learnResults.resx">
+      <DependentUpon>learnResults.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -99,6 +141,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="questionResult.resx">
+      <DependentUpon>questionResult.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
