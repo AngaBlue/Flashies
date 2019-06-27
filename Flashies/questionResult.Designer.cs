@@ -45,7 +45,7 @@
             this.txtTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTitle.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(26, 18);
+            this.txtTitle.Location = new System.Drawing.Point(25, 20);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.ReadOnly = true;
             this.txtTitle.Size = new System.Drawing.Size(649, 37);
@@ -59,7 +59,7 @@
             this.txtProgress.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtProgress.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProgress.Location = new System.Drawing.Point(692, 18);
+            this.txtProgress.Location = new System.Drawing.Point(692, 20);
             this.txtProgress.Name = "txtProgress";
             this.txtProgress.ReadOnly = true;
             this.txtProgress.Size = new System.Drawing.Size(181, 37);
@@ -74,7 +74,7 @@
             this.txtScore.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtScore.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtScore.Location = new System.Drawing.Point(593, 545);
+            this.txtScore.Location = new System.Drawing.Point(593, 534);
             this.txtScore.Name = "txtScore";
             this.txtScore.ReadOnly = true;
             this.txtScore.Size = new System.Drawing.Size(280, 37);
@@ -85,10 +85,10 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(26, 535);
+            this.btnExit.Location = new System.Drawing.Point(25, 532);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(117, 50);
-            this.btnExit.TabIndex = 13;
+            this.btnExit.TabIndex = 1;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             // 
@@ -158,7 +158,7 @@
             this.btnContinue.Location = new System.Drawing.Point(388, 466);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(117, 50);
-            this.btnContinue.TabIndex = 21;
+            this.btnContinue.TabIndex = 0;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = true;
             // 

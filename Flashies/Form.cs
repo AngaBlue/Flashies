@@ -6,19 +6,7 @@ using LiteDB;
 
 namespace Flashies
 {
-    public static class ExtensionMethods
-    {
-        //Find Control Helper Method
-        public static Control getControl(this UserControl userControl, string name)
-        {
-            return userControl.Controls.Find(name, false).FirstOrDefault();
-        }
-        //Create Click Handler Helper Method
-        public static void createClickHandler(this Control button, EventHandler eventHandler)
-        {
-            button.Click += new System.EventHandler(eventHandler);
-        }
-    }
+    //View Helper Methods Below Form Class
     public partial class Form : System.Windows.Forms.Form
     {
         //Flashcard Set Class
@@ -40,19 +28,53 @@ namespace Flashies
         //Hides All UserControls and shows UserControl specified
         public void renderPage(UserControl page)
         {
-            userControls.ForEach(delegate (UserControl userControl)
+            foreach (UserControl userControl in userControls)
             {
                 userControl.Visible = false;
-            });
+            };
             page.Visible = true;
+            page.Controls.Cast<Control>().FirstOrDefault(x => x.TabIndex == 0).Select();
         }
         public Form()
         {
             InitializeComponent();
-            //Add Menus to UserControl List
-            foreach (UserControl c in Controls)
+            //Style
+            foreach (UserControl uc in Controls)
             {
-                userControls.Add(c);
+                //Add Menus to UserControls List
+                userControls.Add(uc);
+                //Styling
+                uc.BackColor = System.Drawing.Color.FromArgb(23, 26, 28);
+                foreach (Control c in uc.Controls)
+                {
+                    c.ForeColor = System.Drawing.Color.White;
+                    Console.WriteLine(c.Font.Size);
+                    c.Font = new System.Drawing.Font("Bahnschrift Light", c.Font.Size < 10F ? 10F : c.Font.Size, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+                    if (c is Button)
+                    {
+                        Button btn = (Button)c;
+                        btn.BackColor = System.Drawing.Color.FromArgb(34, 38, 42);
+                        btn.FlatAppearance.BorderSize = 0;
+                        btn.FlatStyle = FlatStyle.Flat;
+                    }
+                    if (c is TextBox)
+                    {
+                        TextBox txt = (TextBox)c;
+                        if (txt.ReadOnly)
+                        {
+                            txt.BackColor = System.Drawing.Color.FromArgb(23, 26, 28);
+                        }
+                        else
+                        {
+                            txt.BackColor = System.Drawing.Color.FromArgb(34, 38, 42);
+                        }
+                    }
+                    if (c is ListView)
+                    {
+                        ListView lv = (ListView)c;
+                        lv.BackColor = System.Drawing.Color.FromArgb(34, 38, 42);
+                    }
+                }
             }
             /*
              * Add Event Listeners to Buttons
@@ -77,16 +99,17 @@ namespace Flashies
             //Learn Question
             learnQuestionUC.getControl("btnExit").createClickHandler(exit);
             learnQuestionUC.getControl("btnSubmit").createClickHandler(checkLearnQuestion);
+            learnQuestionUC.getControl("txtAnswer").KeyPress += new System.Windows.Forms.KeyPressEventHandler(learnQuestionKeyPress);
             //Learn Question Result
             questionResultUC.getControl("btnExit").createClickHandler(exit);
             questionResultUC.getControl("btnContinue").createClickHandler(renderLearnQuestion);
             //Learn Results
             learnResultsUC.getControl("btnContinue").createClickHandler(menuLearn);
-            
+
             //Render Main Menu
             renderPage(mainMenuUC);
         }
-        //Variable Initialisation
+        //Global Variable Initialisation
         FlashcardSet learnSet = new FlashcardSet { };
         int learnCorrect = 0;
         int learnProgress = 0;
@@ -141,6 +164,7 @@ namespace Flashies
                 {
                     var sets = db.GetCollection<FlashcardSet>("sets");
                     learnSet = sets.FindById(setID);
+                    //Randomise Question Order
                     Random rng = new Random();
                     int n = learnSet.flashcards.Count;
                     while (n > 1)
@@ -164,7 +188,7 @@ namespace Flashies
             {   //Render Results
                 int percentage = learnCorrect * 100 / learnSet.flashcards.Count;
                 ((TextBox)learnResultsUC.getControl("txtTitle")).Text = learnSet.name;
-                ((TextBox)learnResultsUC.getControl("txtCorrect")).Text = $"Correct: {learnCorrect}/{learnSet.flashcards.Count} ({percentage}%)";
+                ((TextBox)learnResultsUC.getControl("txtCorrect")).Text = $"Score: {learnCorrect}/{learnSet.flashcards.Count} ({percentage}%)";
                 renderPage(learnResultsUC);
             }
             else
@@ -175,6 +199,13 @@ namespace Flashies
                 ((TextBox)learnQuestionUC.getControl("txtQuestion")).Text = learnSet.flashcards[learnProgress].question;
                 ((TextBox)learnQuestionUC.getControl("txtAnswer")).Text = "";
                 renderPage(learnQuestionUC);
+            }
+        }
+        private void learnQuestionKeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                checkLearnQuestion(sender, e);
             }
         }
         public void checkLearnQuestion(object sender, EventArgs e)
@@ -188,7 +219,7 @@ namespace Flashies
                 ((TextBox)questionResultUC.getControl("txtCorrectAnswer")).Text = $"Correct Answer: {learnSet.flashcards[learnProgress].answer}";
                 var txtResult = (TextBox)questionResultUC.getControl("txtResult");
                 //Check Response
-                bool correct = userAnswer == learnSet.flashcards[learnProgress].answer;
+                bool correct = userAnswer.ToLower() == learnSet.flashcards[learnProgress].answer.ToLower();
                 if (correct)
                 {
                     learnCorrect++;
@@ -233,12 +264,14 @@ namespace Flashies
         {
             //Display All Flashcard Sets in DB
             createSet = new FlashcardSet { };
+            ((TextBox)createDetailsUC.getControl("txtName")).Text = "";
+            ((TextBox)createDetailsUC.getControl("txtDesc")).Text = "";
             renderPage(createDetailsUC);
         }
         public void checkCreateDetails(object sender, EventArgs e)
         {
             var setName = ((TextBox)createDetailsUC.getControl("txtName")).Text;
-            var setDesc = ((TextBox)createDetailsUC.getControl("txtName")).Text;
+            var setDesc = ((TextBox)createDetailsUC.getControl("txtDesc")).Text;
             if (setName != "" && setDesc != "")
             {
                 createSet.name = setName;
@@ -254,7 +287,7 @@ namespace Flashies
         {
             ((TextBox)createQuestionUC.getControl("txtQuestion")).Text = "";
             ((TextBox)createQuestionUC.getControl("txtAnswer")).Text = "";
-            var cardCount = createSet.flashcards == null ? "1" : (createSet.flashcards.Count + 1).ToString();
+            string cardCount = createSet.flashcards == null ? "1" : (createSet.flashcards.Count + 1).ToString();
             ((TextBox)createQuestionUC.getControl("txtQuestionNumber")).Text = $"Q: {cardCount}";
         }
 
@@ -295,6 +328,19 @@ namespace Flashies
                 //Return to Create Menu
                 menuCreate(this, e);
             }
+        }
+    }
+    public static class ExtensionMethods
+    {
+        //Find Control Helper Method
+        public static Control getControl(this UserControl userControl, string name)
+        {
+            return userControl.Controls.Find(name, false).FirstOrDefault();
+        }
+        //Create Click Handler Helper Method
+        public static void createClickHandler(this Control button, EventHandler eventHandler)
+        {
+            button.Click += new System.EventHandler(eventHandler);
         }
     }
 }

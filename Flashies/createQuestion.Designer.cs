@@ -41,10 +41,10 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(750, 540);
+            this.btnNext.Location = new System.Drawing.Point(709, 540);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(129, 47);
-            this.btnNext.TabIndex = 9;
+            this.btnNext.Size = new System.Drawing.Size(170, 47);
+            this.btnNext.TabIndex = 2;
             this.btnNext.Text = "Next Question";
             this.btnNext.UseVisualStyleBackColor = true;
             // 
@@ -53,16 +53,16 @@
             this.btnExit.Location = new System.Drawing.Point(28, 540);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(117, 47);
-            this.btnExit.TabIndex = 8;
+            this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             // 
             // btnFinish
             // 
-            this.btnFinish.Location = new System.Drawing.Point(570, 540);
+            this.btnFinish.Location = new System.Drawing.Point(475, 540);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(174, 47);
-            this.btnFinish.TabIndex = 11;
+            this.btnFinish.Size = new System.Drawing.Size(228, 47);
+            this.btnFinish.TabIndex = 3;
             this.btnFinish.Text = "Create Last Question";
             this.btnFinish.UseVisualStyleBackColor = true;
             // 
@@ -74,7 +74,7 @@
             this.txtQuestion.Multiline = true;
             this.txtQuestion.Name = "txtQuestion";
             this.txtQuestion.Size = new System.Drawing.Size(655, 86);
-            this.txtQuestion.TabIndex = 24;
+            this.txtQuestion.TabIndex = 0;
             // 
             // txtAnswer
             // 
@@ -83,7 +83,7 @@
             this.txtAnswer.MaxLength = 32;
             this.txtAnswer.Name = "txtAnswer";
             this.txtAnswer.Size = new System.Drawing.Size(655, 30);
-            this.txtAnswer.TabIndex = 23;
+            this.txtAnswer.TabIndex = 1;
             // 
             // txtQuestionLabel
             // 
@@ -121,10 +121,10 @@
             this.txtQuestionNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtQuestionNumber.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtQuestionNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuestionNumber.Location = new System.Drawing.Point(762, 14);
+            this.txtQuestionNumber.Location = new System.Drawing.Point(771, 20);
             this.txtQuestionNumber.Name = "txtQuestionNumber";
             this.txtQuestionNumber.ReadOnly = true;
-            this.txtQuestionNumber.Size = new System.Drawing.Size(135, 37);
+            this.txtQuestionNumber.Size = new System.Drawing.Size(108, 37);
             this.txtQuestionNumber.TabIndex = 26;
             this.txtQuestionNumber.TabStop = false;
             this.txtQuestionNumber.Text = "Q -";
@@ -136,7 +136,7 @@
             this.txtTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTitle.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(10, 14);
+            this.txtTitle.Location = new System.Drawing.Point(25, 20);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.ReadOnly = true;
             this.txtTitle.Size = new System.Drawing.Size(746, 37);

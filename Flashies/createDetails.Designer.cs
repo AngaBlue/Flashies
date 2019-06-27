@@ -36,7 +36,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.txtDesc = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnNext
@@ -44,7 +44,7 @@
             this.btnNext.Location = new System.Drawing.Point(762, 540);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(117, 47);
-            this.btnNext.TabIndex = 9;
+            this.btnNext.TabIndex = 2;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
             // 
@@ -53,7 +53,7 @@
             this.btnExit.Location = new System.Drawing.Point(28, 540);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(117, 47);
-            this.btnExit.TabIndex = 8;
+            this.btnExit.TabIndex = 3;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             // 
@@ -63,7 +63,7 @@
             this.txtTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTitle.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(13, 12);
+            this.txtTitle.Location = new System.Drawing.Point(25, 20);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.ReadOnly = true;
             this.txtTitle.Size = new System.Drawing.Size(649, 37);
@@ -134,23 +134,23 @@
             this.txtName.MaxLength = 32;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(597, 30);
-            this.txtName.TabIndex = 19;
+            this.txtName.TabIndex = 0;
             // 
-            // txtDescription
+            // txtDesc
             // 
-            this.txtDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescription.Location = new System.Drawing.Point(93, 337);
-            this.txtDescription.MaxLength = 64;
-            this.txtDescription.Multiline = true;
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(655, 86);
-            this.txtDescription.TabIndex = 20;
+            this.txtDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDesc.Location = new System.Drawing.Point(93, 337);
+            this.txtDesc.MaxLength = 64;
+            this.txtDesc.Multiline = true;
+            this.txtDesc.Name = "txtDesc";
+            this.txtDesc.Size = new System.Drawing.Size(655, 86);
+            this.txtDesc.TabIndex = 1;
             // 
             // createDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.txtDescription);
+            this.Controls.Add(this.txtDesc);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
@@ -175,6 +175,6 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.TextBox txtDesc;
     }
 }

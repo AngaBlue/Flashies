@@ -39,7 +39,7 @@
             this.btnContinue.Location = new System.Drawing.Point(388, 442);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(117, 47);
-            this.btnContinue.TabIndex = 30;
+            this.btnContinue.TabIndex = 0;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = true;
             // 
@@ -79,7 +79,7 @@
             this.txtTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTitle.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(26, 18);
+            this.txtTitle.Location = new System.Drawing.Point(25, 20);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.ReadOnly = true;
             this.txtTitle.Size = new System.Drawing.Size(649, 37);

@@ -42,7 +42,7 @@
             this.btnSubmit.Location = new System.Drawing.Point(579, 344);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(117, 47);
-            this.btnSubmit.TabIndex = 5;
+            this.btnSubmit.TabIndex = 1;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
             // 
@@ -51,7 +51,7 @@
             this.btnExit.Location = new System.Drawing.Point(24, 538);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(117, 47);
-            this.btnExit.TabIndex = 4;
+            this.btnExit.TabIndex = 2;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             // 
@@ -74,9 +74,10 @@
             // txtAnswer
             // 
             this.txtAnswer.Location = new System.Drawing.Point(185, 354);
+            this.txtAnswer.Multiline = true;
             this.txtAnswer.Name = "txtAnswer";
-            this.txtAnswer.Size = new System.Drawing.Size(388, 26);
-            this.txtAnswer.TabIndex = 9;
+            this.txtAnswer.Size = new System.Drawing.Size(388, 30);
+            this.txtAnswer.TabIndex = 0;
             // 
             // txtScore
             // 
@@ -84,7 +85,7 @@
             this.txtScore.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtScore.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtScore.Location = new System.Drawing.Point(591, 548);
+            this.txtScore.Location = new System.Drawing.Point(591, 538);
             this.txtScore.Name = "txtScore";
             this.txtScore.ReadOnly = true;
             this.txtScore.Size = new System.Drawing.Size(280, 37);
