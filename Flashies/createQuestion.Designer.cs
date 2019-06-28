@@ -70,7 +70,7 @@
             // 
             this.txtQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtQuestion.Location = new System.Drawing.Point(123, 217);
-            this.txtQuestion.MaxLength = 128;
+            this.txtQuestion.MaxLength = 96;
             this.txtQuestion.Multiline = true;
             this.txtQuestion.Name = "txtQuestion";
             this.txtQuestion.Size = new System.Drawing.Size(655, 86);

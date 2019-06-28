@@ -74,6 +74,7 @@
             // txtAnswer
             // 
             this.txtAnswer.Location = new System.Drawing.Point(185, 354);
+            this.txtAnswer.MaxLength = 32;
             this.txtAnswer.Multiline = true;
             this.txtAnswer.Name = "txtAnswer";
             this.txtAnswer.Size = new System.Drawing.Size(388, 30);

@@ -75,16 +75,17 @@
             // columnID
             // 
             this.columnID.Text = "ID";
+            this.columnID.Width = 30;
             // 
             // columnName
             // 
             this.columnName.Text = "Name";
-            this.columnName.Width = 100;
+            this.columnName.Width = 160;
             // 
             // columnDesc
             // 
             this.columnDesc.Text = "Description";
-            this.columnDesc.Width = 500;
+            this.columnDesc.Width = 550;
             // 
             // txtTitle
             // 
